@@ -1,19 +1,18 @@
-import React, { JSXElementConstructor, useState } from "react";
+import React, { useState } from "react";
 import SideBarPresentation from "../presentation";
 import DashboardContainers from "@/components/Dashboard/containers";
-import ListContainers from "@/components/List/containers";
+import ListPresentation from "@/components/List/presentation";
+import { Container } from "@mui/material";
 
-const SideBarContainers = (ListContainers: JSXElementConstructor<any>) => {
+const SideBarContainers = () => {
   const [openDashBoard, setOpenDashBoard] = useState<boolean>(false);
-  const [openList, setOpenList] = useState<boolean>(false);
 
   const handleDashBoard = () => {
     setOpenDashBoard(true);
-    console.log("aqui");
   };
 
   const handleList = () => {
-    setOpenList(true);
+    setOpenDashBoard(false);
   };
 
   return (
@@ -22,8 +21,9 @@ const SideBarContainers = (ListContainers: JSXElementConstructor<any>) => {
         handleDashBoard={handleDashBoard}
         handleList={handleList}
       />
-      {openDashBoard && <DashboardContainers />}
-      {openList && <ListContainers />}
+      <Container>
+        {openDashBoard ? <DashboardContainers /> : <ListPresentation />}
+      </Container>
     </>
   );
 };
